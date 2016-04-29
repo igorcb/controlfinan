@@ -1,0 +1,42 @@
+<h3>Current Account</h3>
+    
+<div class="panel panel-default">
+  <div class="center panel-heading" align="center">Saldo: <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></div>
+  <div class="panel-body">
+
+      <p>
+        <strong>Cash Account:</strong>
+        <%= @current_account.name_account %> 
+      </p>
+
+      <p>
+        <strong>Cost:</strong>
+        <%= @current_account.name_cost %> 
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= @current_account.credito_debito %> 
+      </p>
+
+      <p>
+        <strong>Date Ocurrence:</strong>
+        <%= date_br(@current_account.date_ocurrence) %>
+      </p>
+
+      <p>
+        <strong>Price:</strong>
+        <%= number_to_currency(@current_account.price, unit: "R$ ", separator: ",", delimiter: ".") %> 
+      </p>
+
+      <p>
+        <strong>Historico:</strong>
+        <%= @current_account.historic %>
+      </p>
+
+  </div>
+</div>
+
+<%= link_to 'New', new_current_account_path, class: "btn btn-primary btn-sm btn-block" %>
+<%= link_to 'Edit', edit_current_account_path(@current_account), class: "btn btn-info btn-sm btn-block" %>
+<%= link_to 'Back', current_accounts_path, class: "btn btn-default btn-sm btn-block" %>

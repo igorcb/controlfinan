@@ -1,0 +1,51 @@
+<%= form_for(@current_account) do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :cash_account_id %><br>
+    <%= f.select( :cash_account_id, select_cash_account, {include_blank: false}, {class: "form-control"} )%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cost_id %><br>
+    <%= f.select( :cost_id, select_cost, {include_blank: false}, {class: "form-control"} )%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type_launche %><br>
+    <%= f.select( :type_launche, select_credito_debito, {include_blank: false}, {class: "form-control"} )%>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :date_ocurrence, "Data" %><br>
+    <% if @current_account.new_record? %> 
+      <%= f.text_field :date_ocurrence, value: date_br(DateTime.now), class: "form-control datepicker" %>
+    <% else %>
+      <%= f.text_field :date_ocurrence, value: date_br(@current_account.date_ocurrence), class: "form-control datepicker" %>
+    <% end %>
+  </div>
+
+  
+  <div class="form-group">
+    <%= f.label :price, "Valor" %><br>
+    <%= f.number_field :price, {autofocus: true, class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :historic %><br>
+    <%= f.text_field :historic, {class: "form-control"} %>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.submit "Salvar", class: "btn btn-primary btn-sm btn-block" %>
+    <%= link_to "Exibir",  current_account_path(@current_account), class: "btn btn-info btn-sm btn-block" if !@current_account.new_record? %>
+    <%= link_to "Listar Todos", current_accounts_path, class: "btn btn-default btn-sm btn-block" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      language: 'pt-BR'
+    });
+  });
+</script>

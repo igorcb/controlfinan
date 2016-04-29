@@ -1,0 +1,39 @@
+<div class="panel panel-info">
+  <div class="panel-heading">Listing Current Account</div>
+  <div class="panel-body">
+    <strong><p align="center">Saldo: <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></p></strong>
+    <%= link_to 'New Current account', new_current_account_path, class: "btn btn-primary btn-sm btn-block" %>
+    <%= link_to 'DashBoard', dashboard_path, class: "btn btn-warning btn-sm btn-block" %>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Cash Account</th>
+          <th>Cost</th>
+          <th>Type</th>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>Historico</th>
+          <th colspan="2">Options</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <% @current_accounts.each do |current_account| %>
+          <tr>
+            <td><%= current_account.name_account %></td>
+            <td><%= current_account.name_cost %></td>
+            <td><%= current_account.credito_debito %></td>
+            <td><%= date_br(current_account.date_ocurrence) %></td>
+            <td><%= number_to_currency(current_account.price, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+            <td><%= truncate(current_account.historic, length: 20 )  %></td>
+            <td><%= link_to 'Show', current_account, class: "btn btn-info btn-sm" %></td>
+            <td><%= link_to 'Edit', edit_current_account_path(current_account), class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
