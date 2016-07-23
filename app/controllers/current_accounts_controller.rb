@@ -4,7 +4,8 @@ class CurrentAccountsController < ApplicationController
   # GET /current_accounts
   # GET /current_accounts.json
   def index
-    @current_accounts = CurrentAccount.ordered
+    #@current_accounts = CurrentAccount.ordered
+    @current_accounts = CurrentAccount.ordered.paginate(page: params[:page])
   end
 
   # GET /current_accounts/1
