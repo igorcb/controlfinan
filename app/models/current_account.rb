@@ -15,6 +15,8 @@ class CurrentAccount < ActiveRecord::Base
       when 1 then "Itau"
       when 2 then "Santander"
       when 3 then "CEF Poupança"
+      when 4 then "Pag Seguro"
+      when 5 then "Uber"
     else "Nao Definido"
     end
   end 
@@ -28,6 +30,8 @@ class CurrentAccount < ActiveRecord::Base
       when 4 then "Lanche"
       when 5 then "Diversos"
       when 6 then "Corridas"
+      when 7 then "Telefone"
+      when 8 then "Lavagem"
     else "Nao Definido"
     end
   end

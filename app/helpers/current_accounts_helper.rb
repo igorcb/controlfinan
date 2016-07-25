@@ -1,10 +1,10 @@
 module CurrentAccountsHelper
 	def select_cash_account
-		[["CONTA DINHEIRO", "0"], ["ITAU","1"], ["SANTANDER", "2"], ["CEF POUPANÇA", "3"]]
+		[["CONTA DINHEIRO", "0"], ["ITAU","1"], ["SANTANDER", "2"], ["CEF POUPANÇA", "3"], ["PAG SEGURO", "4"], ["UBER", "5"]]
 	end
 
 	def select_cost
-		[["COMBUSTIVEL", "0"], ["CENTRAL", "1"], ["ALUGUEL CARRO", "2"], ["ALMOÇO", "3"], ["LANCHE", "4"], ["DIVERSOS", "5"], ["CORRIDAS", "6"]]
+		[["COMBUSTIVEL", "0"], ["CENTRAL", "1"], ["ALUGUEL CARRO", "2"], ["ALMOÇO", "3"], ["LANCHE", "4"], ["DIVERSOS", "5"], ["CORRIDAS", "6"], ["TELEFONE", "7"], ["LAVAGEM", "8"]]
 	end
 
 	def select_credito_debito
