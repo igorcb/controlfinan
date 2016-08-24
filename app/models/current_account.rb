@@ -32,6 +32,7 @@ class CurrentAccount < ActiveRecord::Base
       when 6 then "Corridas"
       when 7 then "Telefone"
       when 8 then "Lavagem"
+      when 9 then "Transferencia"
     else "Nao Definido"
     end
   end
