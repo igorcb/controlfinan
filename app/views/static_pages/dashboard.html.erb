@@ -58,38 +58,14 @@
                   </thead>
              
                   <tbody> 
+                    <% CurrentAccount.cash_accounts.each do |current_account| %>
                       <tr>
-                        <td>Dinheiro</td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 0).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                        <td><%= current_account.name_account %></td>
+                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: current_account[:cash_account_id]).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
                       </tr>
-                      <tr>
-                        <td>Itau </td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 1).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td>Santander </td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 2).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td>CEF Poupança </td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 3).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td>Pag Seguro</td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 4).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td>Uber</td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 5).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td>Platinum Itau</td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 6).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Saldo Total</strong> </td>
-                        <td><strong> <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></strong></td>
-                      </tr>
+                    <% end %>
+                    <td><strong>Saldo Total</strong> </td>
+                    <td><strong> <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></strong></td>
                   </tbody>
                 </table>
             </div>

@@ -8,6 +8,7 @@ class CurrentAccount < ActiveRecord::Base
   scope :month_current, lambda { |date| ( where ["date_ocurrence >= ? and date_ocurrence <= ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month])}
   scope :ordered, -> { order(date_ocurrence: :desc, id: :desc) }
   scope :balance_day, -> date {where(date_ocurrence: date).order(date_ocurrence: :desc, id: :desc) }
+  scope :cash_accounts, -> { select(:cash_account_id).uniq.order(:cash_account_id) }
 
   def name_account
     case self.cash_account_id
@@ -17,7 +18,7 @@ class CurrentAccount < ActiveRecord::Base
       when 3 then "CEF Poupança"
       when 4 then "Pag Seguro"
       when 5 then "Uber"
-      when 5 then "Platinum Itau"
+      when 6 then "Platinum Itau"
     else "Nao Definido"
     end
   end 
