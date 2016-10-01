@@ -83,6 +83,10 @@
                         <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 5).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
                       </tr>
                       <tr>
+                        <td>Platinum Itau</td>
+                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: 6).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                      </tr>
+                      <tr>
                         <td><strong>Saldo Total</strong> </td>
                         <td><strong> <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></strong></td>
                       </tr>

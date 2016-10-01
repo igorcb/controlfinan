@@ -17,6 +17,7 @@ class CurrentAccount < ActiveRecord::Base
       when 3 then "CEF Poupança"
       when 4 then "Pag Seguro"
       when 5 then "Uber"
+      when 5 then "Platinum Itau"
     else "Nao Definido"
     end
   end 
