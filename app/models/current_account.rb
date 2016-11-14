@@ -6,9 +6,29 @@ class CurrentAccount < ActiveRecord::Base
   validates :type_launche, presence: true
 
   scope :month_current, lambda { |date| ( where ["date_ocurrence >= ? and date_ocurrence <= ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month])}
+  scope :month_credit, lambda { |date| ( where ["date_ocurrence >= ? and date_ocurrence <= ? and type_launche = ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeLaunche::CREDITO, TypeCost::CORRIDAS])}
   scope :ordered, -> { order(date_ocurrence: :desc, id: :desc) }
   scope :balance_day, -> date {where(date_ocurrence: date).order(date_ocurrence: :desc, id: :desc) }
   scope :cash_accounts, -> { select(:cash_account_id).uniq.order(:cash_account_id) }
+
+  module TypeCost
+      COMBUSTIVEL   = 0
+      CENTRAL       = 1
+      ALUGUEL_CARRO = 2
+      ALMOÇO        = 3
+      LANCHE        = 4
+      DIVERSOS      = 5
+      CORRIDAS      = 6
+      TELEFONE      = 7
+      LAVAGEM       = 8 
+      TRANSFERENCIA = 9
+      DEPOSITOS     = 10
+  end
+
+  module TypeLaunche
+      DEBITO = -1
+      CREDITO = 1
+  end
 
   def name_account
     case self.cash_account_id
@@ -51,5 +71,14 @@ class CurrentAccount < ActiveRecord::Base
   def self.saldo(date=nil)
     date.nil? ? CurrentAccount.sum('price*type_launche') : CurrentAccount.where(date_ocurrence: date).sum('price*type_launche')
   end
+
+  def self.credit(date=nil)
+    #CurrentAccount.where(type_launche: TypeLaunche::CREDITO, date_ocurrence: date, cost_id: TypeCost::CORRIDAS)
+    date.nil? ? CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS, date_ocurrence: date).sum('price*type_launche')
+  end    
+
+  def self.expense(date)
+    CurrentAccount.where(type_launche: TypeLaunche::DEBITO, date_ocurrence: date, cost_id: [TypeCost::COMBUSTIVELTypeCost::ALMOÇO,TypeCost::LANCHE])
+  end    
 
 end

@@ -25,8 +25,9 @@
 <div class="container">
     <div id="content">
         <ul id="tabs" class="nav nav-pills nav-tabs" data-tabs="tabs">
-            <li class="active"><a href="#red" data-toggle="tab">Detalhado</a></li>
+            <li class="active"><a href="#red" data-toggle="tab">Saldo Diario</a></li>
             <li><a href="#orange" data-toggle="tab">Por Conta</a></li>
+            <li><a href="#credit" data-toggle="tab">Creditos/Custos</a></li>
         </ul>
         <div id="my-tab-content" class="tab-content">
             <div class="tab-pane active" id="red">
@@ -67,6 +68,25 @@
                     <td><strong>Saldo Total</strong> </td>
                     <td><strong> <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></strong></td>
                   </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="credit">
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+            
+                <tbody> 
+                  <% @current_account_credits.sort_by do |current_account| [0] %>
+                    <tr>
+                      <td><%= date_br(current_account[0]) %></td>
+                      <td><%= number_to_currency(current_account[1], unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
                 </table>
             </div>
         </div>
