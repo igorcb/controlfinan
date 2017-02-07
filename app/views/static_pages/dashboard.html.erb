@@ -48,7 +48,7 @@
                   <% end %>
                   <tr>
                     <td>Total:</td>
-                    <td><%= number_to_currency(@total_accounts, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                    <td> <strong><%= number_to_currency(@total_accounts, unit: "R$ ", separator: ",", delimiter: ".") %></strong> </td>
                   </tr>
                 </tbody>
               </table>
@@ -92,7 +92,7 @@
                   <% end %>
                   <tr>
                     <td>Total:</td>
-                    <td><%= number_to_currency(@total_credits, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                    <td> <strong><%= number_to_currency(@total_credits, unit: "R$ ", separator: ",", delimiter: ".") %></strong> </td>
                   </tr>
                 </tbody>
                 </table>
