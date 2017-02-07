@@ -46,6 +46,10 @@
                       <td><%= number_to_currency(current_account[1], unit: "R$ ", separator: ",", delimiter: ".") %></td>
                     </tr>
                   <% end %>
+                  <tr>
+                    <td>Total:</td>
+                    <td><%= number_to_currency(@total_accounts, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -86,6 +90,10 @@
                       <td><%= number_to_currency(current_account[1], unit: "R$ ", separator: ",", delimiter: ".") %></td>
                     </tr>
                   <% end %>
+                  <tr>
+                    <td>Total:</td>
+                    <td><%= number_to_currency(@total_credits, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                  </tr>
                 </tbody>
                 </table>
             </div>
