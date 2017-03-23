@@ -1,7 +1,7 @@
 <div class="panel panel-info">
   <div class="panel-heading"><%= link_to 'Listing Current Account', current_accounts_path %></div>
   <div class="panel-body">
-    <strong><p align="center">Saldo: <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></p></strong>
+    <strong><p align="center">Saldo: <%= number_to_currency(current_user.current_accounts.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></p></strong>
     <%= link_to 'New Current account', new_current_account_path, class: "btn btn-primary btn-sm btn-block" %>
     <%= link_to 'DashBoard', dashboard_path, class: "btn btn-warning btn-sm btn-block" %>
   </div>

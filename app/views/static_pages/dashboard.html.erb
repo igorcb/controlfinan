@@ -66,7 +66,7 @@
                     <% @cash_accounts.each do |current_account| %>
                       <tr>
                         <td><%= current_account.name_account %></td>
-                        <td><%= number_to_currency(CurrentAccount.where(cash_account_id: current_account[:cash_account_id]).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                        <td><%= number_to_currency(current_user.current_accounts.where(cash_account_id: current_account[:cash_account_id]).saldo, unit: "R$ ", separator: ",", delimiter: ".") %></td>
                       </tr>
                     <% end %>
                     <td><strong>Saldo Total</strong> </td>
