@@ -1,4 +1,13 @@
 module CurrentAccountsHelper
+  def full_title(page_title)
+    base_title = "ControlFinan"
+    if page_title.empty?
+      base_title
+    else
+      "#{base_title} | #{page_title}"
+    end
+  end	
+
 	def select_cash_account
 		[["CONTA DINHEIRO", "0"], ["ITAU","1"], ["SANTANDER", "2"], ["CEF POUPANÇA", "3"], ["PAG SEGURO", "4"], ["UBER", "5"], ["PLATINUM ITAU", "6"]]
 	end
