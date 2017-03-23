@@ -1,11 +1,13 @@
 class CurrentAccountsController < ApplicationController
   before_action :set_current_account, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /current_accounts
   # GET /current_accounts.json
   def index
     #@current_accounts = CurrentAccount.ordered
-    @current_accounts = CurrentAccount.ordered.paginate(page: params[:page])
+    #@current_accounts = CurrentAccount.ordered.paginate(page: params[:page])
+    @current_accounts = current_user.current_accounts.ordered.paginate(page: params[:page])
   end
 
   # GET /current_accounts/1
@@ -25,7 +27,8 @@ class CurrentAccountsController < ApplicationController
   # POST /current_accounts
   # POST /current_accounts.json
   def create
-    @current_account = CurrentAccount.new(current_account_params)
+    #@current_account = CurrentAccount.new(current_account_params)
+    @current_account = current_user.current_accounts.new(current_account_params)
 
     respond_to do |format|
       if @current_account.save
@@ -63,14 +66,18 @@ class CurrentAccountsController < ApplicationController
   end
 
   def search
-    @current_accounts = CurrentAccount.where(date_ocurrence: params[:date_calendar_now])
-    @saldo = CurrentAccount.saldo(params[:date_calendar_now])
+    #@current_accounts = CurrentAccount.where(user_id: current_user, date_ocurrence: params[:date_calendar_now])
+    #@saldo = CurrentAccount.saldo(params[:date_calendar_now])
+    
+    @current_accounts = current_user.current_accounts.where(date_ocurrence: params[:date_calendar_now])
+    @saldo = current_user.current_accounts.saldo(params[:date_calendar_now])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_current_account
-      @current_account = CurrentAccount.find(params[:id])
+      #@current_account = CurrentAccount.find(params[:id])
+      @current_account = current_user.current_accounts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

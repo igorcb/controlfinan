@@ -10,6 +10,8 @@ class CurrentAccount < ActiveRecord::Base
   scope :ordered, -> { order(date_ocurrence: :desc, id: :desc) }
   scope :balance_day, -> date {where(date_ocurrence: date).order(date_ocurrence: :desc, id: :desc) }
   scope :cash_accounts, -> { select(:cash_account_id).uniq.order(:cash_account_id) }
+  # Testar scopes com user_id do current_user
+  # scope :for_user, lambda{ |user| where(:user_id => user.id) }
 
   module TypeCost
       COMBUSTIVEL   = 0
@@ -74,11 +76,13 @@ class CurrentAccount < ActiveRecord::Base
 
   def self.credit(date=nil)
     #CurrentAccount.where(type_launche: TypeLaunche::CREDITO, date_ocurrence: date, cost_id: TypeCost::CORRIDAS)
-    date.nil? ? CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS, date_ocurrence: date).sum('price*type_launche')
+
+
+    #date.nil? ? CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(type_launche: TypeLaunche::CREDITO, cost_id: TypeCost::CORRIDAS, date_ocurrence: date).sum('price*type_launche')
   end    
 
   def self.expense(date)
-    CurrentAccount.where(type_launche: TypeLaunche::DEBITO, date_ocurrence: date, cost_id: [TypeCost::COMBUSTIVELTypeCost::ALMOÇO,TypeCost::LANCHE])
+    #CurrentAccount.where(type_launche: TypeLaunche::DEBITO, date_ocurrence: date, cost_id: [TypeCost::COMBUSTIVELTypeCost::ALMOÇO,TypeCost::LANCHE])
   end    
 
 end
