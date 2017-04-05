@@ -1,7 +1,7 @@
 <h3>Current Account</h3>
     
 <div class="panel panel-default">
-  <div class="center panel-heading" align="center">Saldo: <%= number_to_currency(CurrentAccount.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></div>
+  <div class="center panel-heading" align="center">Saldo: <%= number_to_currency(current_user.current_accounts.saldo, unit: "R$ ", separator: ",", delimiter: ".") %></div>
   <div class="panel-body">
 
       <p>

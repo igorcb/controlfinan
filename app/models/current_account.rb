@@ -25,6 +25,10 @@ class CurrentAccount < ActiveRecord::Base
       LAVAGEM       = 8 
       TRANSFERENCIA = 9
       DEPOSITOS     = 10
+      ESTACIONAMENTO= 11
+      IMPOSTOS      = 12
+      MULTAS        = 13
+      MANUTENCAO    = 14
   end
 
   module TypeLaunche
@@ -41,6 +45,7 @@ class CurrentAccount < ActiveRecord::Base
       when 4 then "Pag Seguro"
       when 5 then "Uber"
       when 6 then "Platinum Itau"
+      when 7 then "Banco do Brasil"
     else "Nao Definido"
     end
   end 
@@ -58,6 +63,10 @@ class CurrentAccount < ActiveRecord::Base
       when 8 then "Lavagem"
       when 9 then "Transferencia"
       when 10 then "Depositos"
+      when 11 then "Estacionamento"
+      when 12 then "Impostos"
+      when 13 then "Multas"
+      when 14 then "Manutencao"
     else "Nao Definido"
     end
   end
