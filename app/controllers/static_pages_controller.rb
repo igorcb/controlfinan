@@ -15,4 +15,8 @@ class StaticPagesController < ApplicationController
 
     @cash_accounts = CurrentAccount.where(user_id: current_user).cash_accounts
   end
+
+  def moviment
+    
+  end
 end
