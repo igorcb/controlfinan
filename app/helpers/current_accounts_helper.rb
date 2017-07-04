@@ -13,7 +13,7 @@ module CurrentAccountsHelper
 	end
 
 	def select_cost
-		[["COMBUSTIVEL", "0"], ["CENTRAL", "1"], ["ALUGUEL CARRO", "2"], ["ALMOÇO", "3"], ["LANCHE", "4"], ["DIVERSOS", "5"], ["CORRIDAS", "6"], ["TELEFONE", "7"], ["LAVAGEM", "8"], ["TRANSFERENCIA", "9"], ["DEPOSITOS", "10"], ["ESTACIONAMENTO", "11"], ["IMPOSTOS", "12"], ["MULTAS", "13"], ["MANUTENCAO", "14"]]
+		[["COMBUSTIVEL", "0"], ["CENTRAL", "1"], ["ALUGUEL CARRO", "2"], ["ALMOÇO", "3"], ["LANCHE", "4"], ["DIVERSOS", "5"], ["CORRIDAS", "6"], ["TELEFONE", "7"], ["LAVAGEM", "8"], ["TRANSFERENCIA", "9"], ["DEPOSITOS", "10"], ["ESTACIONAMENTO", "11"], ["IMPOSTOS", "12"], ["MULTAS", "13"], ["MANUTENCAO", "14"], ["VIAGENS UBER", "15"]]
 	end
 
 	def select_credito_debito

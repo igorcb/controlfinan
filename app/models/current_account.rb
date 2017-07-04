@@ -29,6 +29,7 @@ class CurrentAccount < ActiveRecord::Base
       IMPOSTOS      = 12
       MULTAS        = 13
       MANUTENCAO    = 14
+      VIAGENS_UBER  = 15
   end
 
   module TypeLaunche
@@ -67,6 +68,7 @@ class CurrentAccount < ActiveRecord::Base
       when 12 then "Impostos"
       when 13 then "Multas"
       when 14 then "Manutencao"
+      when 15 then "Viagens Uber"
     else "Nao Definido"
     end
   end
