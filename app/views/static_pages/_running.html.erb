@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+
+  <tbody> 
+    <% @current_account_credits.sort_by do |current_account| [0] %>
+      <tr>
+        <td><%= date_br(current_account[0]) %></td>
+        <td><%= number_to_currency(current_account[1], unit: "R$ ", separator: ",", delimiter: ".") %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>Total:</td>
+      <td> <strong><%= number_to_currency(@total_credits, unit: "R$ ", separator: ",", delimiter: ".") %></strong> </td>
+    </tr>
+  </tbody>
+  
+</table>
