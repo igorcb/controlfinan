@@ -23,5 +23,10 @@ module CurrentAccountsHelper
 
   def date_br(date)
     date.nil? ? "" : I18n.l(date, format: '%d/%m/%Y')
-  end  
+  end
+
+  def current_month(date=nil)
+    month = date.nil? ? Date.current : date
+    I18n.l(month, format: "%B")
+  end
 end
