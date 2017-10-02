@@ -10,6 +10,8 @@ class CurrentAccount < ActiveRecord::Base
   scope :ordered, -> { order(date_ocurrence: :desc, id: :desc) }
   scope :balance_day, -> date {where(date_ocurrence: date).order(date_ocurrence: :desc, id: :desc) }
   scope :cash_accounts, -> { select(:cash_account_id).uniq.order(:cash_account_id) }
+  #scope :running , lambda { |date| ( where ["date_ocurrence >= ? and date_ocurrence <= ? and type_launche = ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeLaunche::CREDITO, TypeCost::CORRIDAS])}
+  #scope :running , lambda { |date| ( where ["date_ocurrence >= ? and date_ocurrence <= ? and type_launche = ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeLaunche::CREDITO, TypeCost::CORRIDAS])}
   # Testar scopes com user_id do current_user
   # scope :for_user, lambda{ |user| where(:user_id => user.id) }
 
@@ -95,5 +97,21 @@ class CurrentAccount < ActiveRecord::Base
   def self.expense(date)
     #CurrentAccount.where(type_launche: TypeLaunche::DEBITO, date_ocurrence: date, cost_id: [TypeCost::COMBUSTIVELTypeCost::ALMOÇO,TypeCost::LANCHE])
   end    
+
+  def self.running(date)
+    date.nil? ? CurrentAccount.where(cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(["date_ocurrence >= ? and date_ocurrence <= ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeCost::CORRIDAS]).sum('price*type_launche')
+  end
+
+  def self.fuel(date)
+    date.nil? ? CurrentAccount.where(cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(["date_ocurrence >= ? and date_ocurrence <= ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeCost::COMBUSTIVEL]).sum('price')
+  end
+
+  def self.wash(date)
+    date.nil? ? CurrentAccount.where(cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(["date_ocurrence >= ? and date_ocurrence <= ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeCost::LAVAGEM]).sum('price')
+  end
+
+  def self.fone(date)
+    date.nil? ? CurrentAccount.where(cost_id: TypeCost::CORRIDAS).sum('price*type_launche') : CurrentAccount.where(["date_ocurrence >= ? and date_ocurrence <= ? and cost_id = ?", DateTime.parse(date).beginning_of_month, DateTime.parse(date).end_of_month, TypeCost::TELEFONE]).sum('price')
+  end
 
 end

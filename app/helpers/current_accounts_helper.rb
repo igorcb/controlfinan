@@ -27,6 +27,8 @@ module CurrentAccountsHelper
 
   def current_month(date=nil)
     month = date.nil? ? Date.current : date
-    I18n.l(month, format: "%B")
+    #I18n.l(month, format: "%B")
+    #I18n.t("date.abbr_month_names")[Date.today.month]
+    I18n.t("date.abbr_month_names")[date]
   end
 end

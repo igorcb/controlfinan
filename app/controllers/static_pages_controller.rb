@@ -14,6 +14,14 @@ class StaticPagesController < ApplicationController
     @current_account_credits = credits.sort { |x, y| y[0] <=> x[0] }
 
     @cash_accounts = CurrentAccount.where(user_id: current_user).cash_accounts
+
+    @running = CurrentAccount.where(user_id: current_user).running(date_br(DateTime.now.to_date))
+    @fuel = CurrentAccount.where(user_id: current_user).fuel(date_br(DateTime.now.to_date))
+    @wash = CurrentAccount.where(user_id: current_user).wash(date_br(DateTime.now.to_date))
+    @fone = CurrentAccount.where(user_id: current_user).fone(date_br(DateTime.now.to_date))
+
+    @summary = @running - @fuel - @wash - @fone
+
   end
 
   def moviment
