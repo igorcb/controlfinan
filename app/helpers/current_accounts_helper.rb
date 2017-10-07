@@ -9,7 +9,7 @@ module CurrentAccountsHelper
   end	
 
 	def select_cash_account
-		[["CONTA DINHEIRO", "0"], ["ITAU","1"], ["SANTANDER", "2"], ["CEF POUPANÇA", "3"], ["PAG SEGURO", "4"], ["UBER", "5"], ["PLATINUM ITAU", "6"], ["BANCO DO BRASIL", "7"]]
+		[["CONTA DINHEIRO", "0"], ["ITAU","1"], ["SANTANDER", "2"], ["CEF POUPANÇA", "3"], ["PAG SEGURO", "4"], ["UBER", "5"], ["PLATINUM ITAU", "6"], ["BANCO DO BRASIL", "7"], ["99Pop", "8"]]
 	end
 
 	def select_cost

@@ -49,6 +49,7 @@ class CurrentAccount < ActiveRecord::Base
       when 5 then "Uber"
       when 6 then "Platinum Itau"
       when 7 then "Banco do Brasil"
+      when 8 then "99Pop"
     else "Nao Definido"
     end
   end 
