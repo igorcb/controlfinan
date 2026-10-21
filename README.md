@@ -1,63 +1,67 @@
 # ControlFinan
 
+**English** | [Português](README.pt-BR.md)
+
 ![Ruby](https://img.shields.io/badge/Ruby-2.5-CC342D?logo=ruby&logoColor=white)
 ![Rails](https://img.shields.io/badge/Rails-4.2-CC0000?logo=rubyonrails&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-11-4169E1?logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 
-Aplicação web para controle financeiro pessoal. Cada usuário registra suas entradas (créditos) e saídas (débitos) em contas como dinheiro, bancos e carteiras de aplicativos, e acompanha o saldo por dia, por conta e por mês.
+A web app for personal finance control. Each user records their income (credits) and expenses (debits) across accounts such as cash, banks and ride-hailing wallets, and tracks the balance by day, by account and by month.
 
-As categorias de despesa vêm prontas para quem trabalha como motorista de aplicativo: corridas, combustível, lavagem, aluguel de carro, estacionamento, multas e manutenção, entre outras.
+The expense categories come ready-made for ride-hailing drivers: rides, fuel, car wash, car rental, parking, fines and maintenance, among others.
 
-## Sumário
+## Table of contents
 
-- [Para que serve](#para-que-serve)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias](#tecnologias)
-- [Como rodar com Docker](#como-rodar-com-docker)
-- [Como usar](#como-usar)
-- [Estrutura](#estrutura)
-- [Limitações conhecidas](#limitações-conhecidas)
+- [What it is for](#what-it-is-for)
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Running with Docker](#running-with-docker)
+- [How to use](#how-to-use)
+- [Project structure](#project-structure)
+- [Known limitations](#known-limitations)
 
-## Para que serve
+## What it is for
 
-- Registrar o dia a dia do dinheiro: quanto entrou, quanto saiu, de qual conta e em qual categoria.
-- Saber o saldo de um dia específico ou o saldo total.
-- Ver o resultado do mês no dashboard, com os totais das corridas descontados de combustível, lavagem e telefone.
-- Manter os dados separados por usuário: cada pessoa só enxerga os próprios lançamentos.
+- Record day-to-day money movements: how much came in, how much went out, from which account and in which category.
+- Check the balance of a specific day or the overall balance.
+- See the month's result on the dashboard, with ride totals minus fuel, car wash and phone costs.
+- Keep data separated per user: each person only sees their own entries.
 
-## Funcionalidades
+## Features
 
-| Tela | Rota | O que faz |
+| Screen | Route | What it does |
 |---|---|---|
-| Conta Corrente | `/` | Lista os lançamentos do usuário, do mais recente para o mais antigo, com paginação e o saldo total |
-| Novo lançamento | `/current_accounts/new` | Cadastra um crédito ou débito |
-| Detalhe, edição e exclusão | `/current_accounts/:id` | Mostra, altera ou remove um lançamento |
-| Consulta de saldo diário | `/search_account` | Informa uma data e mostra os lançamentos e o saldo daquele dia |
-| Dashboard | `/dashboard` | Formulário de consulta de saldo por data e quatro abas do mês corrente: Saldo Diário, Por Conta, Corridas e Saldo Mensal |
-| Moviment | `/moviments` | Resumo por grupos de gastos |
-| Lançamentos em JSON | `/current_accounts.json` | Mesma listagem da tela principal, para integrações |
+| Conta Corrente (current account) | `/` | Lists the user's entries, newest first, with pagination and the overall balance |
+| New entry | `/current_accounts/new` | Creates a credit or a debit |
+| Detail, edit and delete | `/current_accounts/:id` | Shows, changes or removes an entry |
+| Daily balance lookup | `/search_account` | Takes a date and shows that day's entries and balance |
+| Dashboard | `/dashboard` | A balance-by-date form and four tabs for the current month: Saldo Diário (daily balance), Por Conta (by account), Corridas (rides) and Saldo Mensal (monthly balance) |
+| Moviment | `/moviments` | Summary by expense groups |
+| Entries as JSON | `/current_accounts.json` | Same listing as the main screen, for integrations |
 
-### Campos de um lançamento
+### Entry fields
 
-- **Conta:** Dinheiro, Itaú, Santander, CEF Poupança, PagSeguro, Uber, Platinum Itaú, Banco do Brasil ou 99Pop.
-- **Categoria:** Combustível, Central, Aluguel Carro, Almoço, Lanche, Diversos, Corridas, Telefone, Lavagem, Transferência, Depósitos, Estacionamento, Impostos, Multas, Manutenção ou Viagens Uber.
-- **Tipo:** Crédito (soma ao saldo) ou Débito (subtrai do saldo).
-- **Data**, em `dd/mm/aaaa`.
-- **Valor**, positivo, por exemplo `150.00`. O sinal vem do tipo.
-- **Histórico:** texto livre opcional.
+- **Account:** Cash, Itaú, Santander, CEF Poupança, PagSeguro, Uber, Platinum Itaú, Banco do Brasil or 99Pop.
+- **Category:** Fuel, Central, Car rental, Lunch, Snack, Miscellaneous, Rides, Phone, Car wash, Transfer, Deposits, Parking, Taxes, Fines, Maintenance or Uber trips.
+- **Type:** Credit (adds to the balance) or Debit (subtracts from it).
+- **Date**, as `dd/mm/yyyy`.
+- **Amount**, positive, for example `150.00`. The sign comes from the type.
+- **History:** optional free text.
 
-O saldo é a soma de `valor × tipo`, ou seja, créditos menos débitos.
+The balance is the sum of `amount × type`, that is, credits minus debits.
 
-## Tecnologias
+The interface and the account and category names are in Portuguese.
 
-Ruby 2.5, Rails 4.2, PostgreSQL, Devise (autenticação), Bootstrap 3, bootstrap-datepicker e will_paginate. O ambiente de desenvolvimento roda em Docker.
+## Tech stack
 
-## Como rodar com Docker
+Ruby 2.5, Rails 4.2, PostgreSQL, Devise (authentication), Bootstrap 3, bootstrap-datepicker and will_paginate. The development environment runs on Docker.
 
-Pré-requisitos: Docker e Docker Compose.
+## Running with Docker
 
-1. Crie o arquivo `config/database.yml`, que não é versionado:
+Requirements: Docker and Docker Compose.
+
+1. Create the `config/database.yml` file, which is not versioned:
 
    ```yaml
    default: &default
@@ -77,59 +81,59 @@ Pré-requisitos: Docker e Docker Compose.
      database: controlfinan_test
    ```
 
-2. Suba os containers:
+2. Start the containers:
 
    ```
    docker compose up -d
    ```
 
-   Na primeira vez a imagem é construída e as gems são instaladas, o que leva alguns minutos. O container cria o banco e roda as migrations sozinho.
+   The first time, the image is built and the gems are installed, which takes a few minutes. The container creates the database and runs the migrations by itself.
 
-3. Abra http://localhost:3000. A partir de outra máquina, use o IP ou o hostname do computador onde o app está rodando, na porta 3000.
+3. Open http://localhost:3000. From another machine, use the IP or hostname of the computer running the app, on port 3000.
 
-### Criar o primeiro usuário
+### Creating the first user
 
-Não há usuário padrão. Escolha uma das opções:
+There is no default user. Pick one of the options:
 
-- Pela tela: acesse `/users/sign_up` e informe e-mail e senha (mínimo de 8 caracteres).
-- Pelo console:
+- Through the UI: go to `/users/sign_up` and enter an email and password (at least 8 characters).
+- Through the console:
 
   ```
   docker compose exec web bundle exec rails c
-  User.create!(email: "voce@email.com", password: "suasenha123", password_confirmation: "suasenha123")
+  User.create!(email: "you@email.com", password: "yourpassword123", password_confirmation: "yourpassword123")
   ```
 
-### Comandos úteis
+### Useful commands
 
-| Ação | Comando |
+| Action | Command |
 |---|---|
-| Ver logs | `docker compose logs -f web` |
-| Console Rails | `docker compose exec web bundle exec rails c` |
-| Rodar migrations | `docker compose exec web bundle exec rake db:migrate` |
-| Parar | `docker compose down` |
-| Parar e apagar o banco | `docker compose down -v` |
+| View logs | `docker compose logs -f web` |
+| Rails console | `docker compose exec web bundle exec rails c` |
+| Run migrations | `docker compose exec web bundle exec rake db:migrate` |
+| Stop | `docker compose down` |
+| Stop and delete the database | `docker compose down -v` |
 
-Os avisos `PGconn, PGresult, and PGError constants are deprecated` nos logs são normais: vêm da gem `pg` 0.x usada pelo Rails 4.2 e não indicam problema.
+The `PGconn, PGresult, and PGError constants are deprecated` warnings in the logs are normal: they come from the 0.x `pg` gem that Rails 4.2 requires and do not indicate a problem.
 
-## Como usar
+## How to use
 
-1. Entre com seu e-mail e senha.
-2. Em **Conta Corrente**, clique em **New Current account**.
-3. Escolha a conta, a categoria e se é crédito ou débito. Informe a data, o valor e, se quiser, um histórico. Clique em **Salvar**.
-4. Na listagem, use **Show** e **Edit** para consultar ou corrigir um lançamento.
-5. Para saber o saldo de um dia, use a consulta de saldo diário e informe a data.
-6. No **Dashboard**, acompanhe o mês: saldo por dia, totais por conta, corridas e saldo mensal.
+1. Sign in with your email and password.
+2. Under **Conta Corrente**, click **New Current account**.
+3. Choose the account, the category and whether it is a credit or a debit. Enter the date, the amount and, optionally, a history. Click **Salvar**.
+4. In the listing, use **Show** and **Edit** to view or fix an entry.
+5. To check a day's balance, use the daily balance lookup and enter the date.
+6. On the **Dashboard**, follow the month: balance per day, totals per account, rides and monthly balance.
 
-## Estrutura
+## Project structure
 
-- `app/models/current_account.rb`: lançamento, com as contas, categorias, validações e os cálculos de saldo.
-- `app/models/user.rb`: usuário (Devise); possui vários lançamentos.
-- `app/controllers/current_accounts_controller.rb`: CRUD dos lançamentos e consulta de saldo diário.
-- `app/controllers/static_pages_controller.rb`: dashboard e moviment.
-- `Dockerfile`, `docker-compose.yml` e `docker-entrypoint.sh`: ambiente de desenvolvimento.
+- `app/models/current_account.rb`: the entry, with the accounts, categories, validations and balance calculations.
+- `app/models/user.rb`: the user (Devise); has many entries.
+- `app/controllers/current_accounts_controller.rb`: entry CRUD and daily balance lookup.
+- `app/controllers/static_pages_controller.rb`: dashboard and moviment.
+- `Dockerfile`, `docker-compose.yml` and `docker-entrypoint.sh`: development environment.
 
-## Limitações conhecidas
+## Known limitations
 
-- As contas e categorias estão fixas no código, e não em tabelas editáveis.
-- Os cálculos do dashboard usam o mês corrente; não há seleção de outro mês.
-- O Rails 4.2 não recebe mais atualizações de segurança. Não exponha este app na internet sem antes atualizá-lo.
+- Accounts and categories are hard-coded, not editable tables.
+- The dashboard calculations use the current month; there is no way to pick another month.
+- Rails 4.2 no longer receives security updates. Do not expose this app to the internet without upgrading it first.
