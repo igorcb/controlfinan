@@ -1,8 +1,23 @@
 # ControlFinan
 
+![Ruby](https://img.shields.io/badge/Ruby-2.5-CC342D?logo=ruby&logoColor=white)
+![Rails](https://img.shields.io/badge/Rails-4.2-CC0000?logo=rubyonrails&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-11-4169E1?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+
 Aplicação web para controle financeiro pessoal. Cada usuário registra suas entradas (créditos) e saídas (débitos) em contas como dinheiro, bancos e carteiras de aplicativos, e acompanha o saldo por dia, por conta e por mês.
 
 As categorias de despesa vêm prontas para quem trabalha como motorista de aplicativo: corridas, combustível, lavagem, aluguel de carro, estacionamento, multas e manutenção, entre outras.
+
+## Sumário
+
+- [Para que serve](#para-que-serve)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Como rodar com Docker](#como-rodar-com-docker)
+- [Como usar](#como-usar)
+- [Estrutura](#estrutura)
+- [Limitações conhecidas](#limitações-conhecidas)
 
 ## Para que serve
 
@@ -19,7 +34,7 @@ As categorias de despesa vêm prontas para quem trabalha como motorista de aplic
 | Novo lançamento | `/current_accounts/new` | Cadastra um crédito ou débito |
 | Detalhe, edição e exclusão | `/current_accounts/:id` | Mostra, altera ou remove um lançamento |
 | Consulta de saldo diário | `/search_account` | Informa uma data e mostra os lançamentos e o saldo daquele dia |
-| Dashboard | `/dashboard` | Saldo diário, totais por conta, corridas e saldo mensal do mês corrente |
+| Dashboard | `/dashboard` | Formulário de consulta de saldo por data e quatro abas do mês corrente: Saldo Diário, Por Conta, Corridas e Saldo Mensal |
 | Moviment | `/moviments` | Resumo por grupos de gastos |
 | Lançamentos em JSON | `/current_accounts.json` | Mesma listagem da tela principal, para integrações |
 
