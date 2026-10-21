@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: controlfinan
+      POSTGRES_PASSWORD: controlfinan
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: bundle exec rails server -b 0.0.0.0 -p 3000
+    environment:
+      RAILS_ENV: development
+      DB_HOST: db
+      DB_USER: controlfinan
+      DB_PASSWORD: controlfinan
+      DISABLE_SPRING: "1"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+  bundle:
